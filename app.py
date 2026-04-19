@@ -22,13 +22,15 @@ st.markdown("""
     </p>
 """, unsafe_allow_html=True)
 
-# ---------------- LOAD MODEL ----------------
+# ---------------- LOAD MODEL (FIXED) ----------------
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model(
+    model = tf.keras.models.load_model(
         "fake_image_detector.h5",
-        compile=False   # ✅ FIX ADDED (IMPORTANT)
+        compile=False,   # ✅ prevents Keras config error
+        safe_mode=False  # ✅ avoids config mismatch crash
     )
+    return model
 
 model = load_model()
 
@@ -90,7 +92,7 @@ if uploaded_file:
     # 📊 progress bar
     st.progress(real)
 
-    # 🎯 FIXED DECISION LOGIC (IMPORTANT)
+    # 🎯 DECISION LOGIC
     if real >= 0.65:
         st.success("🎉 Looks Real")
         st.balloons()
