@@ -25,12 +25,9 @@ st.markdown("""
 # ---------------- LOAD MODEL (FIXED) ----------------
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model(
-        "fake_image_detector.h5",
-        compile=False,   # ✅ prevents Keras config error
-        safe_mode=False  # ✅ avoids config mismatch crash
+    return tf.keras.models.load_model(
+        "fake_image_detector.keras"   # ✅ FIXED FILE FORMAT
     )
-    return model
 
 model = load_model()
 
