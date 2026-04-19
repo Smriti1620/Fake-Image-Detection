@@ -36,4 +36,4 @@ Custom image dataset split into:
 
 ### Install dependencies
 ```bash
-pip install -r Requirements.txt
+pip install -r requirements.txt
